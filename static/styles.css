@@ -4,11 +4,22 @@ body {
 }
 
 h1 {
-    text-align: center;
+    text-align: left;
 }
 
-#roomForm {
-    text-align: center;
+#content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    margin: 0;
+}
+
+#roomForm, #joinRoomForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 }
 
 #currentUsers {
@@ -45,5 +56,60 @@ button {
 /* Adjust styles for points button */
 #pointsButton {
     flex: 1; /* Occupy 1/3 of the available space */
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    height: 100%;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.player-info {
+    text-align: right;
+}
+
+.player-info span {
+    display: block;
+    margin-bottom: 5px; /* Add some space between player name and room ID */
+}
+
+/* Center the form */
+#roomForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px; /* Adjust as needed */
+}
+
+/* Style the input box */
+#playerName, #roomID {
+    width: 300px;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+/* Style the buttons */
+#joinRoomButton, #createRoomButton, #joinRoomForm button[type="submit"] {
+    padding: 12px 24px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #4CAF50; /* Green */
+    color: white;
+    transition: background-color 0.3s;
+}
+
+#joinRoomButton:hover, #createRoomButton:hover, #joinRoomForm button[type="submit"]:hover {
+    background-color: #45a049; /* Darker green */
 }
 

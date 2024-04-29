@@ -1,4 +1,4 @@
-# from langchain_openai import ChatOpenAI
+from langchain_openai import ChatOpenAI
 from langchain_community.chat_models import ChatLiteLLM
 from langchain.schema import SystemMessage, HumanMessage, AIMessage
 
@@ -6,8 +6,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-chat = ChatLiteLLM(model="together_ai/meta-llama/Llama-3-70b-chat-hf")
-
+# chat = ChatLiteLLM(model="together_ai/meta-llama/Llama-3-70b-chat-hf")
+chat = ChatOpenAI()
 # User -> User Info(List[str]), Explicit(bool), Nationality(str)
 user_info = [
     "I am a college student. I am studying computer science. I like playing video games. Mostly alone in my house",
@@ -81,7 +81,7 @@ Just ask the question and nothing else."""
     return question
 
 
-"""previous_question = []
+previous_question = []
 while True:
     persona = getPlayersPersona(user_info)
     a = input("Continue? [any, N] > ")
@@ -92,7 +92,7 @@ while True:
         question = getQuestion(persona, theme, nationality, previous_question)
         previous_question.append(question)
         # print("\033[91m" + persona + "\033[0m")
-        print("\033[92m" + question + "\033[0m")"""
+        print("\033[92m" + question + "\033[0m")
 
 
 def runner(previous_question, user_info, theme, nationality):

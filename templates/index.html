@@ -3,55 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Never Have I Ever Game</title>
+    <title>Have you ever?</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.2/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <h1>Never Have I Ever Game</h1>
-    
-    <!-- Display room ID -->
-    <div id="roomIdDisplay"></div>
-
-    <!-- Form for joining or creating a room -->
-    <form id="roomForm">
-        <label for="playerName">Enter your name:</label>
-        <input type="text" id="playerName" name="playerName" required>
-        <button type="submit" id="joinRoomButton">Join Room</button>
-        <button type="button" id="createRoomButton">Create Room</button>
-    </form>
-
-    <!-- Form for joining a room -->
-    <form id="joinRoomForm" style="display: none;">
-        <label for="roomID">Enter Room ID:</label>
-        <input type="text" id="roomID" name="roomID" required>
-        <button type="submit">Join</button>
-    </form>
-    
-    <!-- Display current users -->
-    <div id="currentUsers"></div>
-    
-    <!-- Game section -->
-    <div id="gameSection" style="display: none;">
-        <!-- Question section -->
-        <div id="questionSection">
-            <h2>Question:</h2>
-            <p id="questionText"></p>
-        </div>
-        <!-- Answer buttons -->
-        <div id="answerButtons">
-            <button id="yesButton" onclick="sendResponse('yes')">Yes</button>
-            <button id="noButton" onclick="sendResponse('no')">No</button>
-        </div>
-        <!-- Points button -->
-        <div id="pointsButton">
-            <button id="pointsButton" onclick="showPoints()">Points</button>
+    <div class="header">
+        <h1>Have you ever?</h1>
+        <div class="player-info" id="playerInfo">
+            <span id="playerNameDisplay"></span>
+            <span id="roomIDDisplay"></span>
         </div>
     </div>
 
-    <!-- Display game state -->
-    <div id="gameState"></div>
+
+    <!-- Wrap everything else in a div -->
+    <div id="content">
+        <!-- Player name and room ID -->
+
+
+        <!-- Form for joining or creating a room -->
+        <form id="roomForm">
+            <label for="playerName">Enter your name:</label>
+            <input type="text" id="playerName" name="playerName" required>
+            <button type="submit" id="joinRoomButton">Join Room</button>
+            <button type="button" id="createRoomButton">Create Room</button>
+        </form>
+
+        <!-- Form for joining a room -->
+        <form id="joinRoomForm" style="display: none;">
+            <label for="roomID">Enter Room ID:</label>
+            <input type="text" id="roomID" name="roomID" required>
+            <button type="submit">Join</button>
+        </form>
+        
+        <!-- Game section -->
+        <div id="gameSection" style="display: none;">
+            <!-- Question section -->
+            <div id="questionSection">
+                <h2>Question:</h2>
+                <p id="questionText"></p>
+            </div>
+            <!-- Answer buttons -->
+            <div id="answerButtons">
+                <button id="yesButton" onclick="sendResponse('yes')">Yes</button>
+                <button id="noButton" onclick="sendResponse('no')">No</button>
+            </div>
+        </div>
+
+        <!-- Display game state -->
+        <div id="gameState"></div>
+    </div>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>

@@ -22,18 +22,32 @@ def room(room_id):
 @socketio.on("connect")
 def connect():
     print("Client connected:", request.sid)
+    if "roomId" in request.headers:
+        room_id = request.headers["roomId"]
+        join_room(room_id)
+        rooms[room_id]["users"].append(request.sid)
+        emit(
+            "update_users",
+            {"users": rooms[room_id]["users"], "roomID": room_id},
+            room=room_id,
+        )
+        emit("update_game_state", rooms[room_id]["game_state"], room=room_id)
+    else:
+        print("No room ID found. Creating a new room.")
 
 
-@socketio.on("disconnect")
-def disconnect():
-    print("Client disconnected:", request.sid)
+# Handle user disconnect
+@socketio.on("disconnect_user")
+def disconnect_user():
+    print("User disconnected:", request.sid)
+    # Find the user's room and remove them
     for room_id, room in rooms.items():
         if request.sid in room["users"]:
             room["users"].remove(request.sid)
             emit("update_users", room["users"], room=room_id)
             print("User disconnected:", request.sid)
             print("Current users in room:", room["users"])
-        break
+            break
 
 
 @socketio.on("create_room")
@@ -54,7 +68,11 @@ def join_custom_room(data):
     join_room(room_id)
     rooms[room_id]["users"].append(request.sid)
     rooms[room_id]["game_state"][request.sid] = {"name": user_name, "response": None}
-    emit("update_users", rooms[room_id]["users"], room=room_id)
+    emit(
+        "update_users",
+        {"users": rooms[room_id]["users"], "roomID": room_id},
+        room=room_id,
+    )
     emit("update_game_state", rooms[room_id]["game_state"], room=room_id)
     print("User joined room:", room_id)
     print("Current users in room:", rooms[room_id]["users"])
